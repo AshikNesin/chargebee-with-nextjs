@@ -12,7 +12,16 @@ const plans = {
 
 export default function Home() {
   const [subscription, setSubscription] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
   const [cbInstance, setCbInstance] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/billing').then(res => res.json()).then(data => {
+      setSubscription(data?.subscription)
+      setIsLoading(false)
+    })
+  }, [setSubscription])
+
   const handleCheckout = (planId) => {
     if (typeof window !== 'undefined') {
       if (!cbInstance && window.Chargebee) {
@@ -41,21 +50,17 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    fetch('/api/billing').then(res => res.json()).then(data => {
-      setSubscription(data?.subscription)
-    })
-  }, [setSubscription])
+  const hasSubscription = !isLoading && subscription !== null
 
   return (
     <>
       <div style={containerBoxStyle}>
-        <h2>Current Subscription Payload</h2>
-        <pre>{JSON.stringify(subscription, null, 4)}</pre>
+        <h2>Current Subscription Record</h2>
+        <pre>{isLoading ? 'fetching data from api' : JSON.stringify(subscription, null, 4)}</pre>
       </div>
       <div style={containerBoxStyle}>
         <h2>Subscribe / Manage your Subscription</h2>
-        <button onClick={() => handleCheckout(plans.basicMonthly)}>Subscribe</button>
+        <button onClick={() => handleCheckout(hasSubscription ? plans.basicYearly : plans.basicMonthly)}> {hasSubscription ? 'Upgrade' : 'Subscribe'}</button>
       </div>
       <Script
         src="https://js.chargebee.com/v2/chargebee.js"
