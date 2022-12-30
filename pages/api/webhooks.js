@@ -1,6 +1,6 @@
-import { CHARGEBEE_WEBHOOKS_REQUEST_ORIGINS } from '../../server/utils/chargebee'
-import Subscription from "./../../../server/models/Subscription";
-import dbConnect from '../../../server/config/database'
+import { CHARGEBEE_WEBHOOKS_REQUEST_ORIGINS } from 'server/utils/chargebee'
+import Subscription from "server/models/Subscription";
+import dbConnect from 'server/config/database'
 
 export default async function handler(req, res) {
     try {

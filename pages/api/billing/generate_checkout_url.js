@@ -1,5 +1,5 @@
 import chargebee from "chargebee";
-import { initChargebee } from '../../../server/config/chargebee'
+import { initChargebee } from 'server/config/chargebee'
 
 
 initChargebee()

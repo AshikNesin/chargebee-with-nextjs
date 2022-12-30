@@ -1,5 +1,5 @@
-import Subscription from "./../../../server/models/Subscription";
-import dbConnect from '../../../server/config/database'
+import Subscription from "server/models/Subscription";
+import dbConnect from 'server/config/database'
 
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
