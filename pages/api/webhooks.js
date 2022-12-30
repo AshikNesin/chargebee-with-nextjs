@@ -1,4 +1,4 @@
-import { CHARGEBEE_WEBHOOKS_REQUEST_ORIGINS } from 'server/utils/chargebee'
+import { CHARGEBEE_WEBHOOKS_REQUEST_ORIGINS } from 'server/config/chargebee'
 import Subscription from "server/models/Subscription";
 import dbConnect from 'server/config/database'
 
