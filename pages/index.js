@@ -63,7 +63,7 @@ export default function Home() {
           return data;
         },
         success(hostedPageId) {
-          alert("Successfully created/updated subscription")
+          alert("Successfully created/updated subscription. It'll take sometime to update in the app")
         },
         close: () => {
           console.log("checkout new closed");
@@ -85,7 +85,7 @@ export default function Home() {
         <pre>{isLoading ? 'fetching data from api' : JSON.stringify(subscription, null, 4)}</pre>
       </div>
       <div style={containerBoxStyle}>
-        <h2>Subscribe / Manage your Subscription</h2>
+        <h2>Subscribe / Upgrade your Subscription</h2>
         <button onClick={() => handleCheckout(hasSubscription ? plans.basicYearly : plans.basicMonthly)}> {hasSubscription ? 'Upgrade' : 'Subscribe'}</button>
       </div>
       <Script
