@@ -7,7 +7,7 @@ import customer from 'server/mocks/customer'
 export default async function handler(req, res) {
     await dbConnect()
     const subscription = await Subscription.getCurrentUserSubscription({
-        userId: customer.id,
+        userId: req.query?.userId || customer.id,
     })
     res.json({ subscription });
 }

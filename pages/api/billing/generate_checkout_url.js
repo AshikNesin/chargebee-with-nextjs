@@ -11,9 +11,9 @@ export default async function handler(req, res) {
     // Here we're hard coding for our convenience since we're not implementing auth module.
 
 
-    const userId = customer.id
-
     const { planId } = req.query;
+    const userId = req.query?.userId || customer.id
+
     const payload = {
         subscription: {
             id: userId,
