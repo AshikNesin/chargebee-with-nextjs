@@ -4,10 +4,14 @@ import chargebee from "chargebee";
 
 const subscriptionSchema = new Schema(
   {
+    // 👉 Ideally, userId schema will look like below.
+    // Since we're not building auth I've commented it our and using plain string instead.
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      require: "Please input userId",
-      ref: "User",
+      // type: mongoose.Schema.Types.ObjectId,
+      // require: "Please input userId",
+      // ref: "User",
+      type: String,
+      default: null
     },
     chargebeeCustomerId: {
       type: String,
