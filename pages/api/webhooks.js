@@ -9,8 +9,7 @@ export default async function handler(req, res) {
 
         if (
             (requestIp &&
-                CHARGEBEE_WEBHOOKS_REQUEST_ORIGINS.find((ip) => ip === requestIp)) ||
-            true
+                CHARGEBEE_WEBHOOKS_REQUEST_ORIGINS.find((ip) => ip === requestIp))
         ) {
             await dbConnect()
             await Subscription.handleWebooks(req.body);
