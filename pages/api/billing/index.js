@@ -6,8 +6,8 @@ import dbConnect from 'server/config/database'
 
 export default async function handler(req, res) {
     await dbConnect()
-    const subscription = await Subscription.findOne({
-        user: 'example_user_id',
-    }).populate("plan");
+    const subscription = await Subscription.getCurrentUserSubscription({
+        userId: 'example_user_id_2',
+    })
     res.json({ subscription });
 }

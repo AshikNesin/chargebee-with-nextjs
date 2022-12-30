@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     // Ideally, we'll get customer details from our auth module.
     // Here we're hard coding for our convenience since we're not implementing auth module.
     const customer = {
-        id: 'example_user_id',
+        id: 'example_user_id_2',
         email: 'user@example.com',
     }
 
