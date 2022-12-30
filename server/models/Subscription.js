@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 import chargebee from "chargebee";
+import { initChargebee } from 'server/config/chargebee'
+
+initChargebee()
 
 const subscriptionSchema = new Schema(
   {
