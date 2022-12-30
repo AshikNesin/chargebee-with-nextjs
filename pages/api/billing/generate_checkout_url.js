@@ -1,8 +1,6 @@
 import chargebee from "chargebee";
 import { initChargebee } from 'server/config/chargebee'
 
-import customer from 'server/mocks/customer'
-
 initChargebee()
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
@@ -12,8 +10,7 @@ export default async function handler(req, res) {
 
 
     const { planId } = req.query;
-    const userId = req.query?.userId || customer.id
-
+    const userId = req.query?.userId || 'example_user_id'
 
     const payload = {
         subscription: {
@@ -25,7 +22,10 @@ export default async function handler(req, res) {
                 quantity: 1,
             },
         ],
-        customer: customer,
+        customer: {
+            id: userId,
+            email: `${userId}@example.com`
+        },
     };
 
     let hasSubscription = false;
