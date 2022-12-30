@@ -16,7 +16,16 @@ export default function Home() {
   const [cbInstance, setCbInstance] = useState(null);
 
   useEffect(() => {
-    fetch('/api/billing').then(res => res.json()).then(data => {
+    let params = (new URL(document.location)).searchParams;
+    const queryString = {}
+    if (params.get("userId")) {
+      queryString.userId = params.get("userId")
+    }
+    const qs = Object.keys(queryString).map(key => {
+      return `${key}=${encodeURIComponent(queryString[key])}`;
+    }).join('&');
+
+    fetch(`/api/billing?${qs}`).then(res => res.json()).then(data => {
       setSubscription(data?.subscription)
       setIsLoading(false)
     })
@@ -34,7 +43,23 @@ export default function Home() {
       }
       cbInstance?.openCheckout({
         hostedPage: async () => {
-          const data = await (await fetch(`/api/billing/generate_checkout_url?planId=${planId}`)).json()
+
+          let params = (new URL(document.location)).searchParams;
+
+          const queryString = {
+            planId,
+          }
+
+          if (params.get("userId")) {
+            queryString.userId = params.get("userId")
+          }
+
+          const qs = Object.keys(queryString).map(key => {
+            return `${key}=${encodeURIComponent(queryString[key])}`;
+          }).join('&');
+
+
+          const data = await (await fetch(`/api/billing/generate_checkout_url?${qs}`)).json()
           return data;
         },
         success(hostedPageId) {
@@ -56,6 +81,7 @@ export default function Home() {
     <>
       <div style={containerBoxStyle}>
         <h2>Current Subscription Record</h2>
+        <span>To set custom <b>userId</b>. You can add userId query string (eg: ?userId=example)</span>
         <pre>{isLoading ? 'fetching data from api' : JSON.stringify(subscription, null, 4)}</pre>
       </div>
       <div style={containerBoxStyle}>

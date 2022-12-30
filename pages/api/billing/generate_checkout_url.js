@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     const { planId } = req.query;
     const userId = req.query?.userId || customer.id
 
+
     const payload = {
         subscription: {
             id: userId,
